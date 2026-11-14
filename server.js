@@ -4,7 +4,7 @@ import path from 'path';
 import { testConnection } from './src/models/db.js';
 import { getAllOrganizations } from './src/models/organizations.js';
 import { getAllProjects } from './src/models/projects.js';
-
+import { getAllCategories } from './src/models/categories.js';
 
 
 // Define the application environment
@@ -56,14 +56,10 @@ app.get('/projects', async (req, res) => {
 });
 
 app.get('/categories',async (req, res) => {
-    const title = 'Project Categories';
-    const categories = [
-    "Environmental",
-    "Educational",
-    "Community Service",
-    "Health and Wellness"
-  ];
-    res.render('categories', { title, categories });
+  const categories = await getAllCategories();   
+  const title = 'Project Categories';
+    
+  res.render('categories', { title, categories });
     
 });
 

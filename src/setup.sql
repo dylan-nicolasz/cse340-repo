@@ -87,3 +87,28 @@ VALUES
 ('Disaster Relief Volunteers',
  'Coordinating volunteers to provide essential supplies and support to communities affected by natural disasters.',
  'Ambato, Ecuador', '2026-12-10', 3);
+
+
+CREATE TABLE categories (
+	category_id SERIAL PRIMARY KEY,
+	category_name VARCHAR (100) NOT NULL
+);
+
+INSERT INTO categories (category_name)
+VALUES 
+	('Environmental'),
+	('Educational'),
+	('Community Service'),
+	('Health and Wellness');
+
+
+--SELECT * FROM categories;
+
+CREATE TABLE project_categories (
+	project_id INTEGER NOT NULL,
+	category_id INTEGER NOT NULL,
+
+	PRIMARY KEY (project_id, category_id), --Composite primary key
+	FOREIGN KEY (project_id) REFERENCES serviceProjects (project_id),
+	FOREIGN KEY (category_id) REFERENCES categories (category_id)
+);
